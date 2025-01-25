@@ -16,9 +16,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private NavMeshAgent agent;
 
-    [FormerlySerializedAs("_abillitySlash")] [SerializeField] private Ability abilitySlash;
+    [FormerlySerializedAs("_abillitySlash")] [SerializeField]
+    private Ability abilitySlash;
 
-    [FormerlySerializedAs("_abillitySmash")] [SerializeField] private Ability abilitySmash;
+    [FormerlySerializedAs("_abillitySmash")] [SerializeField]
+    private Ability abilitySmash;
 
     [SerializeField] private Animator _animator;
 
@@ -30,11 +32,9 @@ public class PlayerController : MonoBehaviour
     private int _health = 5;
     private bool _isExecutingAbility = false;
 
-    [SerializeField]
-    private GameObject[] _disableOnDeath;
-    
-    [SerializeField]
-    private GameObject _model;
+    [SerializeField] private GameObject[] _disableOnDeath;
+
+    [SerializeField] private GameObject _model;
 
     public static int Score = 0;
 
@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviour
 
         abilitySlash.Finished += AbilityFinishedHandler;
         abilitySmash.Finished += AbilityFinishedHandler;
-        
     }
 
     private void OnDestroy()
@@ -64,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
         _abillitySlashAction.action.started -= OnAbillitySlashPressed;
         _abillitySmashAction.action.started -= OnAbillitySmashPressed;
-        
+
         _hitBox.TriggerEntered -= TriggerEnterHandler;
 
         abilitySlash.Finished -= AbilityFinishedHandler;
@@ -80,7 +79,7 @@ public class PlayerController : MonoBehaviour
     {
         _isExecutingAbility = false;
     }
-    
+
     private void OnAbillitySlashPressed(InputAction.CallbackContext ctx)
     {
         if (!_isExecutingAbility && abilitySlash.TryCast())
@@ -88,7 +87,6 @@ public class PlayerController : MonoBehaviour
             _isExecutingAbility = true;
             _animator.SetTrigger("SlashTrigger");
         }
-        
     }
 
     private void OnAbillitySmashPressed(InputAction.CallbackContext ctx)
@@ -106,9 +104,13 @@ public class PlayerController : MonoBehaviour
     {
         _movmentVector = _moveAction.action.ReadValue<Vector2>();
         agent.destination = transform.position + new Vector3(_movmentVector.x * 3, 0f, _movmentVector.y * 3);
-        if (_movmentVector.sqrMagnitude > 0f)
+
+        
+        Vector3 mousePos = Input.mousePosition;
+        Ray r = Camera.main.ScreenPointToRay(mousePos);
+        if (Physics.Raycast(r, out RaycastHit h, 100))
         {
-            agent.transform.rotation = Quaternion.LookRotation(new Vector3(_movmentVector.x, 0f, _movmentVector.y));
+            agent.transform.LookAt(h.point);
         }
     }
 
@@ -121,7 +123,7 @@ public class PlayerController : MonoBehaviour
 
         if (er.Enemy.Type is EnemyType.Moskito)
         {
-            if (Vector3.Dot(er.Enemy.transform.forward, transform.forward) > 0)
+            if (Vector3.Dot(er.Enemy.transform.forward, er.Enemy.transform.position - transform.position) < 0)
             {
                 // Moskiots cant bite backwards
                 return;
@@ -130,11 +132,11 @@ public class PlayerController : MonoBehaviour
 
         _health -= er.Enemy.EnemyData.Damage;
         OnHealthChanged?.Invoke(_health);
-        
+
         if (_health <= 0)
         {
             _animator.SetTrigger("DeathTrigger");
-            foreach ( GameObject go in _disableOnDeath)
+            foreach (GameObject go in _disableOnDeath)
             {
                 go.SetActive(false);
             }
