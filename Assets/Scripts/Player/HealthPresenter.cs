@@ -15,10 +15,18 @@ public class HealthPresenter : MonoBehaviour
 
     [SerializeField]
     private Material _bubbleMat;
+    
+    private Color origColor = new Color(0.0417357f, 0.8679164f, 1f, 0.2980392f);
 
     private void Start()
     {
+        _bubbleMat.color = origColor;
         _playerController.OnHealthChanged += UpdateDisplays;
+    }
+
+    private void OnDestroy()
+    {
+        _bubbleMat.color = origColor;
     }
 
     private void UpdateDisplays(int currentHealth)
@@ -36,8 +44,7 @@ public class HealthPresenter : MonoBehaviour
             _firstLife.Health.CrossFadeAlpha(0, 0.5f, true);
         }
 
-        Color orig = _bubbleMat.color;
         _bubbleMat.color = new Color(1f, 0f, 0f, 0.4f);
-        _bubbleMat.DOColor(orig, 1f);
+        _bubbleMat.DOColor(origColor, 1f);
     }
 }

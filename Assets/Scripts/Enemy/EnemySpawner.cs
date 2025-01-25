@@ -4,10 +4,12 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private Enemy _enemyPrefab;
+    [SerializeField] private Enemy _moskitoPrefab;
+    [SerializeField] private Enemy _seaUrchinPrefab;
     [SerializeField] private Transform _playerTransform;
 
-    [SerializeField] private int _enemysToSpawn = 50;
+    [SerializeField] private int _moskitosToSpawn = 0;
+    [SerializeField] private int _seaUrchinsToSpawn = 0;
 
     [SerializeField] private Transform[] _spawnPlanes;
 
@@ -17,10 +19,51 @@ public class EnemySpawner : MonoBehaviour
 
     private float _timeSinceLastSpawn = 0f;
     private int _totalSpawned = 0;
+    private float _timeTillNextSpawn = 0;
+
+    [SerializeField]
+    private SoWave[] _waves;
+
+    private int currentWave;
+    private float _lastWaveTime = 0f;
+
+    private void Start()
+    {
+        InitializeWave(0);
+        Spawn();
+        _timeSinceLastSpawn = 0f;
+    }
+
+    private void InitializeWave(int index)
+    {
+        int actualWave = currentWave;
+        bool repeatLastWave = false;
+        if (currentWave >= _waves.Length)
+        {
+            repeatLastWave = true;
+            actualWave = _waves.Length-1;
+        }
+        SoWave currentWaveData = _waves[actualWave];
+        _moskitosToSpawn = currentWaveData.AmountOfMoskitos;
+        _seaUrchinsToSpawn = currentWaveData.AmountOfSeaUrchin;
+        if (repeatLastWave)
+        {
+            _timeTillNextSpawn = _lastWaveTime * 0.95f;
+        }
+        else
+        {
+            _timeTillNextSpawn = currentWaveData.TimeBeforeNextWave;
+        }
+        _lastWaveTime = _timeTillNextSpawn;
+    }
+
     private void Update()
     {
-        if (_timeSinceLastSpawn > _timeBetweenSpawns)
+        if (_timeSinceLastSpawn > _timeTillNextSpawn)
         {
+            currentWave++;
+            
+            InitializeWave(currentWave);
             Spawn();
             _timeSinceLastSpawn = 0f;
         }
@@ -30,10 +73,18 @@ public class EnemySpawner : MonoBehaviour
 
     public void Spawn()
     {
-        if (_totalSpawned >= _enemysToSpawn)
+        for (int i = 0; i < _moskitosToSpawn; i++)
         {
-            return;
+            SpawnPrefab(_moskitoPrefab);
         }
+        for (int i = 0; i < _seaUrchinsToSpawn; i++)
+        {
+            SpawnPrefab(_seaUrchinPrefab);
+        }
+    }
+
+    private void SpawnPrefab(Enemy prefab)
+    {
         int planeToSpawn = Random.Range(0, _spawnPlanes.Length);
         /* Move the object to where you want withing in the dimensions of the plane */
         // random the x and z position between bounds
@@ -48,8 +99,7 @@ public class EnemySpawner : MonoBehaviour
         //z_rand = x_rand > z_rand ? Random.Range(0, z_rand) : Random.Range(0, x_rand);
 
         // Spawn the object as a child of the plane. This will solve any rotation issues
-        Enemy obj = Instantiate(_enemyPrefab, new Vector3(x_rand, 0, z_rand), Quaternion.identity, transform);
+        Enemy obj = Instantiate(prefab, new Vector3(x_rand, 0, z_rand), Quaternion.identity, transform);
         obj.Init(_playerTransform, _scoreController);
-        _totalSpawned++;
     }
 }

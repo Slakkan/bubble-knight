@@ -2706,9 +2706,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0af86fba0628c40a1928b5221221b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 8653343222063095418, guid: f266bc60099f11c448d2821d4f75ef5e, type: 3}
+  _moskitoPrefab: {fileID: 9015164919557462749, guid: 4531d705c8e556748a23215561b7da3c, type: 3}
+  _seaUrchinPrefab: {fileID: 8653343222063095418, guid: f266bc60099f11c448d2821d4f75ef5e, type: 3}
   _playerTransform: {fileID: 1672317120}
-  _enemysToSpawn: 10
+  _moskitosToSpawn: 0
+  _seaUrchinsToSpawn: 0
   _spawnPlanes:
   - {fileID: 1485931571}
   - {fileID: 768147706}
@@ -2716,6 +2718,12 @@ MonoBehaviour:
   - {fileID: 1407236765}
   _timeBetweenSpawns: 1
   _scoreController: {fileID: 1909289142}
+  _waves:
+  - {fileID: 11400000, guid: 86106a137870dea48b0f1fb1c948b8ab, type: 2}
+  - {fileID: 11400000, guid: 234a97e96bd25854f84580d615f7675a, type: 2}
+  - {fileID: 11400000, guid: b0aecb22b2ddee749900249fe96d46ec, type: 2}
+  - {fileID: 11400000, guid: 02e5ab7dc8f46be49b2749857d4ebf43, type: 2}
+  - {fileID: 11400000, guid: 4f58837e178fc804abdc5810ad86945d, type: 2}
 --- !u!1 &1721421439 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1969719619517349908, guid: df56d05ca45ae644aa863f75b5db30b8, type: 3}
