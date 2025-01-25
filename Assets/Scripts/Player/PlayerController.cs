@@ -105,7 +105,14 @@ public class PlayerController : MonoBehaviour
         _movmentVector = _moveAction.action.ReadValue<Vector2>();
         agent.destination = transform.position + new Vector3(_movmentVector.x * 3, 0f, _movmentVector.y * 3);
 
-        
+        if(_movmentVector.magnitude == 0f)
+        {
+            _animator.SetBool("IsWalking", false);
+        } else
+        {
+            _animator.SetBool("IsWalking", true);
+        }
+
         Vector3 mousePos = Input.mousePosition;
         Ray r = Camera.main.ScreenPointToRay(mousePos);
         if (Physics.Raycast(r, out RaycastHit h, 100))
