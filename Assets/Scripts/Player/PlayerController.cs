@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject _model;
 
+    public event Action<int> OnHealthChanged;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -116,7 +118,7 @@ public class PlayerController : MonoBehaviour
         
 
         _health -= er.Enemy.EnemyData.Damage;
-        Debug.Log($"Hit. New Health {_health}");
+        OnHealthChanged?.Invoke(_health);
         
         if (_health <= 0)
         {
