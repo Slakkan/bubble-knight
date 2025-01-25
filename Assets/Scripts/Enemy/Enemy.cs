@@ -31,6 +31,12 @@ public class Enemy : MonoBehaviour
 
     private ScoreController _scoreController;
 
+    [SerializeField] private MeshRenderer _meshRenderer;
+    [SerializeField]
+    private Material _defaultMaterial;
+    [SerializeField]
+    private Material _damagedMaterial;
+
     public void Init(Transform PlayerTransform, ScoreController scoreController)
     {
         _currentHealth = _enemyData.Health;
@@ -61,6 +67,13 @@ public class Enemy : MonoBehaviour
 
             a._hitEnemysWithLastCast.Add(this);
             _currentHealth -= a.AbilityData.Damage;
+            if (_meshRenderer != null)
+            {
+                _meshRenderer.material = _damagedMaterial;
+                StartCoroutine(ResetMaterial());
+            }
+
+            
             if (_currentHealth <= 0)
             {
                 _scoreController.AddScore();
@@ -71,6 +84,12 @@ public class Enemy : MonoBehaviour
                                       (1 - _enemyData.KnockBackResistance);
             _agent.velocity = knockBackVector;
         }
+    }
+
+    private IEnumerator ResetMaterial()
+    {
+        yield return new WaitForSeconds(1f);
+        _meshRenderer.material = _defaultMaterial;
     }
 
     private void PlayerNearHandler(Collider other)

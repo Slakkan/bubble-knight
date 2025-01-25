@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6808786e3fc1524892384aafd413a2a, type: 3}
   m_Name: SoAbillity-SwordSmash
   m_EditorClassIdentifier: 
-  Name: Ground
+  Name: Smash
   Damage: 1
   KnockBack: 30
   Cooldown: 2
