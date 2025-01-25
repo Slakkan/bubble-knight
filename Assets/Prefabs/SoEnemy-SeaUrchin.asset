@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2590fbd706b95174bb6fa71243e8d69c, type: 3}
   m_Name: SoEnemy-SeaUrchin
   m_EditorClassIdentifier: 
-  Health: 2
+  Health: 3
   KnockBackResistance: 0.2
   Damage: 2

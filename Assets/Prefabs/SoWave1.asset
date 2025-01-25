@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SoWave1
   m_EditorClassIdentifier: 
   AmountOfMoskitos: 5
-  AmountOfSeaUrchin: 0
+  AmountOfSeaUrchin: 1
   TimeBeforeNextWave: 20
