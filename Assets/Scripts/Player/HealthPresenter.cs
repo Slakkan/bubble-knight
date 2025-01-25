@@ -11,6 +11,10 @@ public class HealthPresenter : MonoBehaviour
     [SerializeField]
     private HealthDisplay _thirdLife;
     [SerializeField]
+    private HealthDisplay _fourthLife;
+    [SerializeField]
+    private HealthDisplay _fifthLife;
+    [SerializeField]
     private PlayerController _playerController;
 
     [SerializeField]
@@ -31,6 +35,15 @@ public class HealthPresenter : MonoBehaviour
 
     private void UpdateDisplays(int currentHealth)
     {
+        if (currentHealth < 5)
+        {
+            _fifthLife.Health.CrossFadeAlpha(0, 0.5f, true);
+        }
+        if (currentHealth < 4)
+        {
+            _fourthLife.Health.CrossFadeAlpha(0, 0.5f, true);
+        }
+
         if (currentHealth < 3)
         {
             _thirdLife.Health.CrossFadeAlpha(0, 0.5f, true);

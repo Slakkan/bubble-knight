@@ -11,7 +11,7 @@ public class TriggerCollider : MonoBehaviour
     public event Action<Collider> TriggerEntered;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         _collider = GetComponent<Collider>();
     }

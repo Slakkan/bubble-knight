@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private TriggerCollider _hitBox;
 
-    private int _health = 3;
+    private int _health = 5;
     private bool _isExecutingAbility = false;
 
     [SerializeField]
@@ -118,7 +118,15 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        
+
+        if (er.Enemy.Type is EnemyType.Moskito)
+        {
+            if (Vector3.Dot(er.Enemy.transform.forward, transform.forward) > 0)
+            {
+                // Moskiots cant bite backwards
+                return;
+            }
+        }
 
         _health -= er.Enemy.EnemyData.Damage;
         OnHealthChanged?.Invoke(_health);

@@ -101,6 +101,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 271158952861733021, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
+      propertyPath: _type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 271158952861733021, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
       propertyPath: _enemyData
       value: 
       objectReference: {fileID: 11400000, guid: 983977095a859f34f8044dcbd6161b28, type: 2}
