@@ -164,6 +164,6 @@ public class PlayerController : MonoBehaviour
     private IEnumerator DeleteAfterDeath()
     {
         yield return new WaitForSeconds(0.4f);
-        _model.SetActive(false);
+        agent.gameObject.SetActive(false);
     }
 }

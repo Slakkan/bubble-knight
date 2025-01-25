@@ -92,6 +92,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!23 &3636007824314041081 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: b352644e4e07f0e4c85bf9455fb1a18b, type: 3}
+  m_PrefabInstance: {fileID: 2716836589172235901}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8923179462215290599
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -108,6 +113,18 @@ PrefabInstance:
       propertyPath: _enemyData
       value: 
       objectReference: {fileID: 11400000, guid: 983977095a859f34f8044dcbd6161b28, type: 2}
+    - target: {fileID: 271158952861733021, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
+      propertyPath: _meshRenderer
+      value: 
+      objectReference: {fileID: 3636007824314041081}
+    - target: {fileID: 271158952861733021, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
+      propertyPath: _damagedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 447030e9892b4c74b9e6ac3d856a7357, type: 2}
+    - target: {fileID: 271158952861733021, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
+      propertyPath: _defaultMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 7183e15279f52f540b949f70d9da603d, type: 2}
     - target: {fileID: 271158952861733021, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
       propertyPath: _playerNearCollider
       value: 
