@@ -20,9 +20,12 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private TriggerCollider _playerNearCollider;
 
-    public void Init(Transform PlayerTransform)
+    private ScoreController _scoreController;
+
+    public void Init(Transform PlayerTransform, ScoreController scoreController)
     {
         _currentHealth = _enemyData.Health;
+        _scoreController = scoreController;
         _player = PlayerTransform;
 
         _hitBox.TriggerEntered += TriggerEnteredHandler;
@@ -52,6 +55,7 @@ public class Enemy : MonoBehaviour
             _currentHealth-= a.AbilityData.Damage;
             if (_currentHealth <= 0)
             {
+                _scoreController.AddScore();
                 Destroy(gameObject);
             }
             Vector3 knockBackVector = (transform.position - _player.position).normalized * a.AbilityData.KnockBack *

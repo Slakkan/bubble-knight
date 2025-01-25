@@ -13,6 +13,9 @@ public class HealthPresenter : MonoBehaviour
     [SerializeField]
     private PlayerController _playerController;
 
+    [SerializeField]
+    private Material _bubbleMat;
+
     private void Start()
     {
         _playerController.OnHealthChanged += UpdateDisplays;
@@ -22,15 +25,19 @@ public class HealthPresenter : MonoBehaviour
     {
         if (currentHealth < 3)
         {
-            _thirdLife.Health.CrossFadeAlpha(0, 1f, true);
+            _thirdLife.Health.CrossFadeAlpha(0, 0.5f, true);
         }
         if (currentHealth < 2)
         {
-            _secondLife.Health.CrossFadeAlpha(0, 1f, true);
+            _secondLife.Health.CrossFadeAlpha(0, 0.5f, true);
         }
         if (currentHealth < 1)
         {
-            _firstLife.Health.CrossFadeAlpha(0, 1f, true);
+            _firstLife.Health.CrossFadeAlpha(0, 0.5f, true);
         }
+
+        Color orig = _bubbleMat.color;
+        _bubbleMat.color = new Color(1f, 0f, 0f, 0.4f);
+        _bubbleMat.DOColor(orig, 1f);
     }
 }

@@ -36,11 +36,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject _model;
 
+    public static int Score = 0;
+
     public event Action<int> OnHealthChanged;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Score = 0;
         _moveAction.action.actionMap.Enable();
         agent.updateRotation = false;
         _moveAction.action.started += MovementChanged;

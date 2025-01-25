@@ -13,6 +13,8 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private float _timeBetweenSpawns = 1f;
 
+    [SerializeField] private ScoreController _scoreController;
+
     private float _timeSinceLastSpawn = 0f;
     private int _totalSpawned = 0;
     private void Update()
@@ -47,7 +49,7 @@ public class EnemySpawner : MonoBehaviour
 
         // Spawn the object as a child of the plane. This will solve any rotation issues
         Enemy obj = Instantiate(_enemyPrefab, new Vector3(x_rand, 0, z_rand), Quaternion.identity, transform);
-        obj.Init(_playerTransform);
+        obj.Init(_playerTransform, _scoreController);
         _totalSpawned++;
     }
 }
