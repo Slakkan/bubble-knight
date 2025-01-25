@@ -110,15 +110,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1073725173647955592, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
       propertyPath: m_Size.x
-      value: 4
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1073725173647955592, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
       propertyPath: m_Size.y
-      value: 5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1073725173647955592, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
       propertyPath: m_Size.z
-      value: 4
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1073725173647955592, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
       propertyPath: m_Center.y
@@ -126,7 +126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1466272648865523069, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
       propertyPath: m_Speed
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1466272648865523069, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
       propertyPath: m_AutoBraking

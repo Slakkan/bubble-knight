@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _agent.velocity *= 3f;
+            _agent.velocity *= 1.8f;
         }
         
     }

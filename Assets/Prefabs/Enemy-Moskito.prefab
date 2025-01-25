@@ -76,7 +76,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1073725173647955592, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
       propertyPath: m_Size.z
-      value: 2.4132934
+      value: 1.7152755
       objectReference: {fileID: 0}
     - target: {fileID: 1073725173647955592, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
       propertyPath: m_Center.x
@@ -84,7 +84,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1073725173647955592, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
       propertyPath: m_Center.z
-      value: -0.12873882
+      value: -0.47774783
+      objectReference: {fileID: 0}
+    - target: {fileID: 1466272648865523069, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
+      propertyPath: m_Speed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1466272648865523069, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
+      propertyPath: m_Acceleration
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1466272648865523069, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
       propertyPath: m_AngularSpeed
@@ -137,6 +145,10 @@ PrefabInstance:
     - target: {fileID: 4539543565602440134, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.955
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156876791138730691, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
+      propertyPath: m_Radius
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

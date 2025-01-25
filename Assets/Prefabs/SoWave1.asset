@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmountOfMoskitos: 5
   AmountOfSeaUrchin: 0
-  TimeBeforeNextWave: 60
+  TimeBeforeNextWave: 20
