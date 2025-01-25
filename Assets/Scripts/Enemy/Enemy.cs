@@ -15,12 +15,16 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private TriggerCollider _hitBox;
 
+    [SerializeField]
+    private TriggerCollider _playerNearCollider;
+
     public void Init(Transform PlayerTransform)
     {
         _currentHealth = _enemyData.Health;
         _player = PlayerTransform;
 
         _hitBox.TriggerEntered += TriggerEnteredHandler;
+        _playerNearCollider.TriggerEntered += PlayerNearHandler;
     }
 
     private void Update()
@@ -48,5 +52,15 @@ public class Enemy : MonoBehaviour
                                       (1-_enemyData.KnockBackResistance);
             _agent.velocity = knockBackVector;
         }
+    }
+
+    private void PlayerNearHandler(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("FAST");
+            _agent.velocity *= 3f;
+        }
+        
     }
 }

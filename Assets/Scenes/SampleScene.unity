@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1672317120}
-  _distanceToTarget: 20
+  _distanceToTarget: 30
   _angle: 50
 --- !u!1 &410087039
 GameObject:
@@ -1042,7 +1042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0af86fba0628c40a1928b5221221b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 271158952861733021, guid: 22a8f84551c677a4b898e431b675cab2, type: 3}
+  _enemyPrefab: {fileID: 9015164919557462749, guid: 4531d705c8e556748a23215561b7da3c, type: 3}
   _playerTransform: {fileID: 1672317120}
   _enemysToSpawn: 10
   _spawnPlanes:
@@ -1091,6 +1091,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 889653201}
     m_Modifications:
+    - target: {fileID: 43745887733098074, guid: df56d05ca45ae644aa863f75b5db30b8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592711408005035902, guid: df56d05ca45ae644aa863f75b5db30b8, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1904804376017461164, guid: df56d05ca45ae644aa863f75b5db30b8, type: 3}
       propertyPath: m_Name
       value: Player

@@ -22,7 +22,26 @@ public class Abillity : MonoBehaviour
 
     public void Cast()
     {
-        // Add Cast Time
+        if (_abillityData.CastTime > 0f)
+        {
+            StartCoroutine(CastAfterSeconds(_abillityData.CastTime));
+        }
+        else
+        {
+            ShootAbility();
+        }
+    }
+    
+    private IEnumerator CastAfterSeconds(float afterSeconds)
+    {
+        yield return new WaitForSeconds(afterSeconds / 2.5f);
+
+        _c.Collider.enabled = false;
+    }
+
+    private void ShootAbility()
+    {
+        _hitEnemysWithLastCast.Clear();
         switch (_colliderType)
         {
             case ColliderType.Sphere:
@@ -44,7 +63,9 @@ public class Abillity : MonoBehaviour
                 if (_c.Collider is BoxCollider b)
                 {
                     b.transform.DOLocalRotate(new Vector3(0, -180f, 0), _abillityData.TimeToReachMaxRange / 2.5f,
-                        RotateMode.LocalAxisAdd).OnComplete(() => { _c.Collider.enabled = false;
+                        RotateMode.LocalAxisAdd).OnComplete(() =>
+                    {
+                        _c.Collider.enabled = false;
                         b.transform.localRotation = Quaternion.identity;
                     });
                 }
@@ -53,21 +74,6 @@ public class Abillity : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-
-        _hitEnemysWithLastCast.Clear();
-        if (_abillityData.UseAnimatedCollider)
-        {
-            _c.Collider.enabled = true;
-            StartCoroutine(DeactivateCollider(_abillityData.TimeToReachMaxRange));
-            return;
-        }
-    }
-
-    private IEnumerator DeactivateCollider(float afterSeconds)
-    {
-        yield return new WaitForSeconds(afterSeconds);
-
-        _c.Collider.enabled = false;
     }
 }
 
