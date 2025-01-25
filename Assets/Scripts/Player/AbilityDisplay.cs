@@ -5,16 +5,13 @@ using UnityEngine.UI;
 public class AbilityDisplay : MonoBehaviour
 {
     [SerializeField]
-    private Image _backgroundImage;
-    [SerializeField]
     private TextMeshProUGUI _abilityNameText;
     [SerializeField]
-    private TextMeshProUGUI _currentAbilityCDText;
+    private Image _currentAbilityCDImage;
     [SerializeField]
     private TextMeshProUGUI _hotkeyText;
 
-    public Image BackgroundImage => _backgroundImage;
     public TextMeshProUGUI AbilityNameText => _abilityNameText;
-    public TextMeshProUGUI CurrentAbilityCDText => _currentAbilityCDText;
+    public Image CurrentAbilityCDImage => _currentAbilityCDImage;
     public TextMeshProUGUI HotkeyText => _hotkeyText;
 }

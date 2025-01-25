@@ -9,15 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6808786e3fc1524892384aafd413a2a, type: 3}
-  m_Name: SoAbillity-SwordSmash
+  m_Script: {fileID: 11500000, guid: 2590fbd706b95174bb6fa71243e8d69c, type: 3}
+  m_Name: SoEnemy-Moskito
   m_EditorClassIdentifier: 
-  Name: Ground
+  Health: 1
+  KnockBackResistance: 0
   Damage: 1
-  KnockBack: 30
-  Cooldown: 2
-  Range: 7.5
-  AnimationSpeed: 1
-  AnimationLength: 0.917
-  CastTime: 0.6419
-  TimeToReachMaxRange: 0.2751

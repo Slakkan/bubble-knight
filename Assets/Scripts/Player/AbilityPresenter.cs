@@ -9,14 +9,13 @@ public class AbilityPresenter : MonoBehaviour
 
     public void Start()
     {
-        _display.AbilityNameText.text = _ability.AbilityData.name;
-        _display.CurrentAbilityCDText.text = _ability.CurrentCooldown.ToString("F2");
+        _display.AbilityNameText.text = _ability.AbilityData.Name;
+        _display.CurrentAbilityCDImage.fillAmount = 1f -_ability.CurrentCooldown / ( _ability.AbilityData.Cooldown + _ability.AbilityData.AnimationLength / _ability.AbilityData.AnimationSpeed);
         //_display.HotkeyText.text = TODO
     }
 
     private void Update()
     {
-        _display.CurrentAbilityCDText.text = _ability.CurrentCooldown.ToString("F2");
-        _display.CurrentAbilityCDText.enabled = _ability.CurrentCooldown > 0;
+        _display.CurrentAbilityCDImage.fillAmount = 1f -_ability.CurrentCooldown / ( _ability.AbilityData.Cooldown + _ability.AbilityData.AnimationLength / _ability.AbilityData.AnimationSpeed);
     }
 }

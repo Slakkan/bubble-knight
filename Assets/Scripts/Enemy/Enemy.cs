@@ -26,7 +26,11 @@ public class Enemy : MonoBehaviour
         _player = PlayerTransform;
 
         _hitBox.TriggerEntered += TriggerEnteredHandler;
-        _playerNearCollider.TriggerEntered += PlayerNearHandler;
+        if (_playerNearCollider)
+        {
+            _playerNearCollider.TriggerEntered += PlayerNearHandler;
+        }
+        
     }
 
     private void Update()

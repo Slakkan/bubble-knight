@@ -25,6 +25,7 @@ public class Ability : MonoBehaviour
     private void Update()
     {
         _currentCoolDown -= Time.deltaTime;
+        _currentCoolDown = Mathf.Clamp(_currentCoolDown, 0, 100);
     }
 
     public bool TryCast()
@@ -35,7 +36,7 @@ public class Ability : MonoBehaviour
             Debug.Log("Abililty on CD");
             return false;
         }
-        _currentCoolDown = _abillityData.Cooldown + (_abillityData.AnimationLength) / _abillityData.AnimationSpeed;
+        _currentCoolDown = _abillityData.Cooldown + _abillityData.AnimationLength / _abillityData.AnimationSpeed;
         if (_abillityData.CastTime > 0f)
         {
             StartCoroutine(CastAfterSeconds(_abillityData.CastTime));
@@ -65,9 +66,9 @@ public class Ability : MonoBehaviour
                 if (_c.Collider is SphereCollider s)
                 {
                     DOTween.To(() => s.radius, x => s.radius = x, _abillityData.Range,
-                        _abillityData.TimeToReachMaxRange).OnComplete(() =>
+                        _abillityData.TimeToReachMaxRange).SetEase(Ease.Linear).OnComplete(() =>
                     {
-                        s.radius = 0;
+                        s.radius = 2;
                         s.enabled = false;
                         Finished?.Invoke(this);
                     });

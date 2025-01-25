@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -26,8 +27,14 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private TriggerCollider _hitBox;
 
-    private int _health;
+    private int _health = 3;
     private bool _isExecutingAbility = false;
+
+    [SerializeField]
+    private GameObject[] _disableOnDeath;
+    
+    [SerializeField]
+    private GameObject _model;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
         abilitySlash.Finished += AbilityFinishedHandler;
         abilitySmash.Finished += AbilityFinishedHandler;
+        
     }
 
     private void OnDestroy()
@@ -101,17 +109,30 @@ public class PlayerController : MonoBehaviour
 
     private void TriggerEnterHandler(Collider other)
     {
-        if (!other.gameObject.TryGetComponent(out Enemy e))
+        if (!other.gameObject.TryGetComponent(out EnemyReference er))
         {
             return;
         }
+        
 
-        _health -= e.EnemyData.Damage;
-
+        _health -= er.Enemy.EnemyData.Damage;
+        Debug.Log($"Hit. New Health {_health}");
+        
         if (_health <= 0)
         {
-            // DIE
+            _animator.SetTrigger("DeathTrigger");
+            foreach ( GameObject go in _disableOnDeath)
+            {
+                go.SetActive(false);
+            }
+
+            StartCoroutine(DeleteAfterDeath());
         }
-        
+    }
+
+    private IEnumerator DeleteAfterDeath()
+    {
+        yield return new WaitForSeconds(0.4f);
+        _model.SetActive(false);
     }
 }

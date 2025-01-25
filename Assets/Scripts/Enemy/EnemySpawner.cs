@@ -28,7 +28,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void Spawn()
     {
-        if (_totalSpawned > _enemysToSpawn)
+        if (_totalSpawned >= _enemysToSpawn)
         {
             return;
         }
