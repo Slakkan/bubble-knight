@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AbillityReference : MonoBehaviour
 {
-    [SerializeField] private Abillity _abillity;
+    [FormerlySerializedAs("_abillity")] [SerializeField] private Ability ability;
 
-    public Abillity Abillity => _abillity;
+    public Ability Ability => ability;
 }
