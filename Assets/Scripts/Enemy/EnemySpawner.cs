@@ -21,6 +21,8 @@ public class EnemySpawner : MonoBehaviour
     private int _totalSpawned = 0;
     private float _timeTillNextSpawn = 0;
 
+    public float CurrentTimeTillNextSpawn => _timeTillNextSpawn - _timeSinceLastSpawn;
+
     [SerializeField]
     private SoWave[] _waves;
 
