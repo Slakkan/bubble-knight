@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private NavMeshAgent _agent;
 
     [SerializeField] private SoEnemy _enemyData;
+    
+    public SoEnemy EnemyData => _enemyData;
 
     private int _currentHealth;
 
@@ -36,14 +38,14 @@ public class Enemy : MonoBehaviour
     {
         if (other.transform.TryGetComponent(out AbillityReference ar))
         {
-            Abillity a = ar.Abillity;
+            Ability a = ar.Ability;
             if (a._hitEnemysWithLastCast.Contains(this))
             {
                 return;
             }
 
             a._hitEnemysWithLastCast.Add(this);
-            _currentHealth--;
+            _currentHealth-= a.AbilityData.Damage;
             if (_currentHealth <= 0)
             {
                 Destroy(gameObject);
@@ -58,7 +60,6 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("FAST");
             _agent.velocity *= 3f;
         }
         

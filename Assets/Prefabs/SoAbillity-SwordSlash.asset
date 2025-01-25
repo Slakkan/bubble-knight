@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: SwordSlash
   Damage: 1
-  CastTime: 0.45
   KnockBack: 10
+  Cooldown: 0
   Range: -1
+  AnimationSpeed: 2.5
+  AnimationLength: 1.125
+  CastTime: 0.45
   TimeToReachMaxRange: 0.675
-  UseAnimatedCollider: 1

@@ -1,29 +1,9 @@
 fileFormatVersion: 2
-guid: d7a777c603a40734fbc7084397436031
+guid: b352644e4e07f0e4c85bf9455fb1a18b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: black
-    second: {fileID: 2100000, guid: c0963535e1145cc4c9202315dbd89883, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bubble
-    second: {fileID: 2100000, guid: 5e602cae990d7f44c87891f7cea6c879, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: metal
-    second: {fileID: 2100000, guid: df34b66721e507642821d491bfcc44f0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: slash
-    second: {fileID: 2100000, guid: 0076dc829a2f60e40805aa91b2431a96, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -6,4 +6,6 @@ public class SoEnemy : ScriptableObject
     public int Health;
 
     public float KnockBackResistance;
+    
+    public int Damage;
 }

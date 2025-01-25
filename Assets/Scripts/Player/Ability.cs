@@ -5,7 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 
 
-public class Abillity : MonoBehaviour
+public class Ability : MonoBehaviour
 {
     [SerializeField] private ColliderType _colliderType;
     [SerializeField] private SoAbillity _abillityData;
@@ -16,12 +16,26 @@ public class Abillity : MonoBehaviour
 
     [HideInInspector] public List<Enemy> _hitEnemysWithLastCast = new();
 
-    private void Start()
+    private float _currentCoolDown;
+
+    public float CurrentCooldown => _currentCoolDown;
+
+    public event Action<Ability> Finished;
+
+    private void Update()
     {
+        _currentCoolDown -= Time.deltaTime;
     }
 
-    public void Cast()
+    public bool TryCast()
     {
+        if (_currentCoolDown > 0f)
+        {
+            // Ability on cooldown.
+            Debug.Log("Abililty on CD");
+            return false;
+        }
+        _currentCoolDown = _abillityData.Cooldown + (_abillityData.AnimationLength) / _abillityData.AnimationSpeed;
         if (_abillityData.CastTime > 0f)
         {
             StartCoroutine(CastAfterSeconds(_abillityData.CastTime));
@@ -30,13 +44,14 @@ public class Abillity : MonoBehaviour
         {
             ShootAbility();
         }
+        return true;
     }
     
     private IEnumerator CastAfterSeconds(float afterSeconds)
     {
-        yield return new WaitForSeconds(afterSeconds / 2.5f);
+        yield return new WaitForSeconds(afterSeconds / _abillityData.AnimationSpeed);
 
-        _c.Collider.enabled = false;
+        ShootAbility();
     }
 
     private void ShootAbility()
@@ -54,6 +69,7 @@ public class Abillity : MonoBehaviour
                     {
                         s.radius = 0;
                         s.enabled = false;
+                        Finished?.Invoke(this);
                     });
                 }
 
@@ -62,11 +78,12 @@ public class Abillity : MonoBehaviour
                 _c.Collider.enabled = true;
                 if (_c.Collider is BoxCollider b)
                 {
-                    b.transform.DOLocalRotate(new Vector3(0, -180f, 0), _abillityData.TimeToReachMaxRange / 2.5f,
+                    b.transform.DOLocalRotate(new Vector3(0, -180f, 0), _abillityData.TimeToReachMaxRange/ _abillityData.AnimationSpeed,
                         RotateMode.LocalAxisAdd).OnComplete(() =>
                     {
                         _c.Collider.enabled = false;
                         b.transform.localRotation = Quaternion.identity;
+                        Finished?.Invoke(this);
                     });
                 }
 
@@ -74,6 +91,7 @@ public class Abillity : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+        
     }
 }
 

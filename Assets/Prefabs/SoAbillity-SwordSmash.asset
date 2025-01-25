@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: SwordGround
   Damage: 1
-  CastTime: 0
   KnockBack: 10
+  Cooldown: 5
   Range: 5
-  TimeToReachMaxRange: 0.1
-  UseAnimatedCollider: 0
+  AnimationSpeed: 1
+  AnimationLength: 1.25
+  CastTime: 0.9375
+  TimeToReachMaxRange: 0.3125

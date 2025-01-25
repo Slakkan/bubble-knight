@@ -15,9 +15,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private NavMeshAgent agent;
 
-    [SerializeField] private Abillity _abillitySlash;
+    [FormerlySerializedAs("_abillitySlash")] [SerializeField] private Ability abilitySlash;
 
-    [SerializeField] private Abillity _abillitySmash;
+    [FormerlySerializedAs("_abillitySmash")] [SerializeField] private Ability abilitySmash;
 
     [SerializeField] private Animator _animator;
 
@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     private bool _isMousePressed = false;
 
     [SerializeField] private TriggerCollider _hitBox;
+
+    private int _health;
+    private bool _isExecutingAbility = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,6 +40,9 @@ public class PlayerController : MonoBehaviour
         _abillitySmashAction.action.started += OnAbillitySmashPressed;
 
         _hitBox.TriggerEntered += TriggerEnterHandler;
+
+        abilitySlash.Finished += AbilityFinishedHandler;
+        abilitySmash.Finished += AbilityFinishedHandler;
     }
 
     private void OnDestroy()
@@ -45,6 +51,11 @@ public class PlayerController : MonoBehaviour
 
         _abillitySlashAction.action.started -= OnAbillitySlashPressed;
         _abillitySmashAction.action.started -= OnAbillitySmashPressed;
+        
+        _hitBox.TriggerEntered -= TriggerEnterHandler;
+
+        abilitySlash.Finished -= AbilityFinishedHandler;
+        abilitySmash.Finished -= AbilityFinishedHandler;
     }
 
     private void MovementChanged(InputAction.CallbackContext ctx)
@@ -52,16 +63,28 @@ public class PlayerController : MonoBehaviour
         _movmentVector = _moveAction.action.ReadValue<Vector2>();
     }
 
+    private void AbilityFinishedHandler(Ability a)
+    {
+        _isExecutingAbility = false;
+    }
+    
     private void OnAbillitySlashPressed(InputAction.CallbackContext ctx)
     {
-        _abillitySlash.Cast();
-        _animator.SetTrigger("SlashTrigger");
+        if (!_isExecutingAbility && abilitySlash.TryCast())
+        {
+            _isExecutingAbility = true;
+            _animator.SetTrigger("SlashTrigger");
+        }
+        
     }
 
     private void OnAbillitySmashPressed(InputAction.CallbackContext ctx)
     {
-        _abillitySmash.Cast();
-        _animator.SetTrigger("SmashTrigger");
+        if (!_isExecutingAbility && abilitySmash.TryCast())
+        {
+            _isExecutingAbility = true;
+            _animator.SetTrigger("SmashTrigger");
+        }
     }
 
 
@@ -78,11 +101,17 @@ public class PlayerController : MonoBehaviour
 
     private void TriggerEnterHandler(Collider other)
     {
-        if (!other.gameObject.GetComponent<Enemy>())
+        if (!other.gameObject.TryGetComponent(out Enemy e))
         {
             return;
         }
+
+        _health -= e.EnemyData.Damage;
+
+        if (_health <= 0)
+        {
+            // DIE
+        }
         
-        // DIE
     }
 }
