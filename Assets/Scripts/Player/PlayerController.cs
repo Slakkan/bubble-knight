@@ -111,11 +111,19 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(r, out RaycastHit h, 100))
         {
             agent.transform.LookAt(h.point);
+            Vector3 newForward = h.point - agent.transform.position;
+            agent.transform.forward = (new Vector3(newForward.x, 0f, newForward.z)).normalized;
         }
     }
 
+    private bool isInvincible = false;
+    
     private void TriggerEnterHandler(Collider other)
     {
+        if (isInvincible)
+        {
+            return;
+        }
         if (!other.gameObject.TryGetComponent(out EnemyReference er))
         {
             return;
@@ -123,7 +131,7 @@ public class PlayerController : MonoBehaviour
 
         if (er.Enemy.Type is EnemyType.Moskito)
         {
-            if (Vector3.Dot(er.Enemy.transform.forward, er.Enemy.transform.position - transform.position) < 0)
+            if (Vector3.Dot(er.Enemy.transform.forward, transform.position - er.Enemy.transform.position ) < 0)
             {
                 // Moskiots cant bite backwards
                 return;
@@ -132,6 +140,8 @@ public class PlayerController : MonoBehaviour
 
         _health -= er.Enemy.EnemyData.Damage;
         OnHealthChanged?.Invoke(_health);
+        isInvincible = true;
+        StartCoroutine(RemoveInvincibility());
 
         if (_health <= 0)
         {
@@ -143,6 +153,12 @@ public class PlayerController : MonoBehaviour
 
             StartCoroutine(DeleteAfterDeath());
         }
+    }
+    
+    private IEnumerator RemoveInvincibility()
+    {
+        yield return new WaitForSeconds(1f);
+        isInvincible = false;
     }
 
     private IEnumerator DeleteAfterDeath()
