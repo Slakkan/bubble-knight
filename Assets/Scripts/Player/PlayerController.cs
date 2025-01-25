@@ -115,11 +115,12 @@ public class PlayerController : MonoBehaviour
 
         Vector3 mousePos = Input.mousePosition;
         Ray r = Camera.main.ScreenPointToRay(mousePos);
-        if (Physics.Raycast(r, out RaycastHit h, 100))
+        if (Physics.Raycast(r, out RaycastHit h, 100, LayerMask.GetMask("Terrain")))
         {
             agent.transform.LookAt(h.point);
-            Vector3 newForward = h.point - agent.transform.position;
-            agent.transform.forward = (new Vector3(newForward.x, 0f, newForward.z)).normalized;
+            //Vector3 newForward = h.point - agent.transform.position;
+            //agent.transform.forward = (new Vector3(newForward.x, 0f, newForward.z)).normalized;
+            agent.transform.position = new Vector3(agent.transform.position.x,0,agent.transform.position.z);
         }
     }
 
