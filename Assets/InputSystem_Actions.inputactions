@@ -494,10 +494,10 @@
                 {
                     "name": "",
                     "id": "66853446-f337-4b8b-922c-3bd3fc64b861",
-                    "path": "<Keyboard>/1",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
+                    "groups": "",
                     "action": "AbilitySlash",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -505,7 +505,7 @@
                 {
                     "name": "",
                     "id": "31a90bc9-a92d-4843-9bc4-09276c94e34b",
-                    "path": "<Keyboard>/2",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
